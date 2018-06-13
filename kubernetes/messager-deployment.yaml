@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jwebgames
+      service: messager
+  template:
+    metadata:
+      labels:
+        app: jwebgames
+        service: messager
+    spec:
+      containers:
+        - name: messager
+          image: gcr.io/perso-206820/jwebgames-messager:v1
+          ports:
+            - name: pull-port
+              containerPort: 22549
+            - name: pub-port
+              containerPort: 22550
+          env:
+            - name: MESSAGER_LOGLEVEL
+              value: DEBUG
+            - name: MESSAGER_PULL_ADDR
+              value: tcp://0.0.0.0:22549
+            - name: MESSAGE_PUB_ADDR
+              value: tcp://0.0.0.0:22550
+          resources:
+            limits:
+              cpu: 0.2
+              memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: pull-port
+            initialDelaySeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: pull-port
+            initialDelaySeconds: 10

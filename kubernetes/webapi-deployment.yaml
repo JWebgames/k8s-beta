@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jwebgames
+      service: webapi
+  template:
+    metadata:
+      labels:
+        app: jwebgames
+        service: webapi
+    spec:
+      containers:
+        - name: webapi
+          image: gcr.io/perso-206820/jwebgames-webapi:v1
+          ports:
+            - name: http-port
+              containerPort: 3000
+          env:
+            - name: WEBAPI_HOST
+              value: "0.0.0.0"
+            - name: WEBAPI_PORT
+              value: 3000
+            - name: PRODUCTION
+              value: false
+            - name: MESSAGER_PULL_ADDR
+              value: tcp://0.0.0.0:22549
+            - name: MESSAGE_PUB_ADDR
+              value: tcp://0.0.0.0:22550
+          volumeDevices:
+            - name: docker
+              devicePath: /var/run/docker.sock
+          resources:
+            limits:
+              cpu: 1
+              memory: 500Mi
+      volumes:
+        - name: docker
+          hostPath:
+            path: /var/run/docker.sock
