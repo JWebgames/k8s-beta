@@ -5,7 +5,7 @@ metadata:
   labels:
     app: jwebgames
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: jwebgames
     service: webapi
