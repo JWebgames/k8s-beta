@@ -4,6 +4,7 @@ metadata:
   name: webapi
 spec:
   replicas: 2
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: jwebgames
@@ -27,17 +28,26 @@ spec:
             - name: WEBAPI_PORT
               value: "3000"
             - name: PRODUCTION
-              value: "false"
+              value: "true"
             - name: MESSAGER_PULL_ADDR
-              value: $(MESSAGER_PORT_22549_TCP)
+              value: "tcp://messager:22549"
             - name: MESSAGE_PUB_ADDR
-              value: $(MESSAGER_PORT_22550_TCP)
+              value: "tcp://messager:22550"
+            - name: REDIS_DNS
+              value: "redis://redis:6379/0"
+            - name: PG_HOST
+              value: "postgres"
+            - name: PG_USER
+              value: "webapi"
+            - name: PG_PASSWORD
+              value: "webapi"
+            - name: PG_DATABASE
+              value: "webapi"
             - name: WEBAPI_LOG_LEVEL
-              value: DEBUG
+              value: "DEBUG"
           resources:
             limits:
-              cpu: 0.2
-              memory: 400Mi
+              memory: 200Mi
           livenessProbe:
             httpGet:
               path: /status

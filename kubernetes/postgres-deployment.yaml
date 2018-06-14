@@ -1,0 +1,41 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: jwebgames
+      service: postgres
+  template:
+    metadata:
+      labels:
+        app: jwebgames
+        service: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:alpine
+          ports:
+            - name: postgres-port
+              containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "webapi"
+            - name: POSTGRES_PASSWORD
+              value: "webapi"
+            - name: POSTGRES_DB
+              value: "webapi"
+          resources:
+            limits:
+              memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: postgres-port
+            initialDelaySeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: postgres-port
+            initialDelaySeconds: 10

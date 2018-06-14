@@ -4,6 +4,7 @@ metadata:
   name: messager
 spec:
   replicas: 1
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: jwebgames
@@ -25,14 +26,13 @@ spec:
               containerPort: 22550
           env:
             - name: MESSAGER_LOGLEVEL
-              value: DEBUG
+              value: "DEBUG"
             - name: MESSAGER_PULL_ADDR
-              value: tcp://0.0.0.0:22549
+              value: "tcp://0.0.0.0:22549"
             - name: MESSAGE_PUB_ADDR
-              value: tcp://0.0.0.0:22550
+              value: "tcp://0.0.0.0:22550"
           resources:
             limits:
-              cpu: 0.2
               memory: 100Mi
           livenessProbe:
             tcpSocket:
