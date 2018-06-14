@@ -65,7 +65,7 @@ async def start_http_and_docker_client(_app, loop):
     """Create a shared http client"""
     logger.info("Opening HTTP clients...")
     HTTP(ClientSession(loop=loop))
-    # TODO: CTR(drivers.Docker(aiodocker.Docker()))
+    CTR(drivers.Docker(aiodocker.Docker()))
     logger.info("Clients opened.")
 
 
@@ -93,7 +93,7 @@ async def disconnect_from_messager(_app, _loop):
 async def stop_http_and_docket_client(_app, _loop):
     """Close shared http client"""
     logger.info("Closing HTTP client...")
-    # TODO: await CTR.docker.close()
+    await CTR.docker.close()
     await HTTP.close()
 
 

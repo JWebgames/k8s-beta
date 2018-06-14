@@ -112,4 +112,4 @@ docker-compose.yml
 
 # configuration files
 config*.yml
-!webapi/config.yml
+

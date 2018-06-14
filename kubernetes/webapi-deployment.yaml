@@ -27,24 +27,28 @@ spec:
               value: "0.0.0.0"
             - name: WEBAPI_PORT
               value: "3000"
-            - name: PRODUCTION
-              value: "true"
             - name: MESSAGER_PULL_ADDR
               value: "tcp://messager:22549"
             - name: MESSAGE_PUB_ADDR
               value: "tcp://messager:22550"
-            - name: REDIS_DNS
+            - name: REDIS_DSN
               value: "redis://redis:6379/0"
-            - name: PG_HOST
+            - name: PGHOST
               value: "postgres"
-            - name: PG_USER
+            - name: PGUSER
               value: "webapi"
-            - name: PG_PASSWORD
+            - name: PGPASSWORD
               value: "webapi"
-            - name: PG_DATABASE
+            - name: PGDATABASE
               value: "webapi"
+            - name: WEBAPI_PRODUCTION
+              value: "true"
             - name: WEBAPI_LOG_LEVEL
               value: "DEBUG"
+            - name: WEBAPI_MSQQUEUES_URL
+              value: "http://webapi:80/v1/msgqueues"
+            - name: WEBAPI_GROUP_URL
+              value: "http://webapi:80/v1/groups"
           resources:
             limits:
               cpu: 100m
