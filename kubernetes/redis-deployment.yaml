@@ -23,6 +23,7 @@ spec:
               containerPort: 6379
           resources:
             limits:
+              cpu: 100m
               memory: 100Mi
           livenessProbe:
             tcpSocket:

@@ -30,6 +30,7 @@ spec:
               value: "webapi"
           resources:
             limits:
+              cpu: 100m
               memory: 100Mi
           livenessProbe:
             tcpSocket:

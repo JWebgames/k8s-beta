@@ -4,13 +4,14 @@ VERSION ?= v1
 	messager-build messager-apply messager-delete \
 	webapi-build webapi-apply webapi-delete \
 	redis-apply redis-delete \
-	postgres-apply postgres-delete
+	postgres-apply postgres-delete \
+	traefik-apply traefik-delete
 
 build: messager-build webapi-build
 
 apply: messager-apply redis-apply postgres-apply webapi-apply
 
-delete: messager-delete redis-delete postgres-delete webapi-delete
+delete: webapi-delete postgres-delete messager-delete redis-delete
 
 messager-build:
 	docker build -t gcr.io/$(PROJECT_ID)/jwebgames-messager:$(VERSION) ../messager

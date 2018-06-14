@@ -33,6 +33,7 @@ spec:
               value: "tcp://0.0.0.0:22550"
           resources:
             limits:
+              cpu: 100m
               memory: 100Mi
           livenessProbe:
             tcpSocket:

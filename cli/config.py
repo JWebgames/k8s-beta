@@ -1,6 +1,7 @@
 from logging import DEBUG
+from os import getenv
 
-APIURL = "http://localhost:22548"
+APIURL = getenv("API_URL", "http://localhost")
 LOGLEVEL = DEBUG
 
 GAMES = {
