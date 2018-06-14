@@ -4,8 +4,7 @@ VERSION ?= v1
 	messager-build messager-apply messager-delete \
 	webapi-build webapi-apply webapi-delete \
 	redis-apply redis-delete \
-	postgres-apply postgres-delete \
-	traefik-apply traefik-delete
+	postgres-apply postgres-delete
 
 build: messager-build webapi-build
 
@@ -48,9 +47,7 @@ webapi-build:
 webapi-apply:
 	kubectl apply -f webapi-deployment.yaml
 	kubectl apply -f webapi-service.yaml
-	kubectl apply -f webapi-ingress.yaml
 
 webapi-delete:
-	kubectl delete -f webapi-ingress.yaml
 	kubectl delete -f webapi-service.yaml
 	kubectl delete -f webapi-deployment.yaml
