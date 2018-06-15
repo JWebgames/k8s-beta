@@ -33,12 +33,14 @@ redis-delete:
 	kubectl delete -f redis-deployment.yaml
 
 postgres-apply:
+	kubectl apply -f postgres-volume.yaml
 	kubectl apply -f postgres-deployment.yaml
 	kubectl apply -f postgres-service.yaml
 
 postgres-delete:
 	kubectl delete -f postgres-service.yaml
 	kubectl delete -f postgres-deployment.yaml
+	kubectl delete -f postgres-volume.yaml
 
 webapi-build:
 	docker build -t gcr.io/$(PROJECT_ID)/jwebgames-webapi:$(VERSION) ../webapi
